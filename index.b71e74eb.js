@@ -852,8 +852,8 @@ function initRouter(container) {
             container?.appendChild(el);
         }
     }
-    location.pathname;
-    goTo("/homepage");
+    if (location.pathname === "/" || location.pathname === "/piedra-papel-tijeras/") goTo("/homepage");
+    else handleRoute(location.pathname);
     window.onpopstate = function() {
         handleRoute(location.pathname);
     };
