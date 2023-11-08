@@ -852,8 +852,8 @@ function initRouter(container) {
             container?.appendChild(el);
         }
     }
-    if (location.pathname === "/") goTo("/homepage");
-    else handleRoute(location.pathname);
+    location.pathname;
+    goTo("/homepage");
     window.onpopstate = function() {
         handleRoute(location.pathname);
     };
