@@ -44,7 +44,10 @@ export function initRouter(container: Element | null) {
     }
   }
 
-  if (location.pathname === "/" || "/piedra-papel-tijeras") {
+  if (
+    location.pathname === "/" ||
+    location.pathname === "/piedra-papel-tijeras/"
+  ) {
     goTo("/homepage");
   } else {
     handleRoute(location.pathname);
