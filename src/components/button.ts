@@ -22,10 +22,9 @@ export function initButtonComp() {
           justify-content:center;
           width: 322px;
           height: 87px;
-          border: solid 7px #001997;
-          font-size:25px;
           border-radius: 10px;
           background-color: #006CFC;
+          font-size:25px;
           font-weight: 400;
           font-family: "Odibee Sans";
            border: none;

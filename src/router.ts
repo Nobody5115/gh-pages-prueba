@@ -2,6 +2,7 @@ import { initGamePage } from "./pages/init-home";
 import { initExplanation } from "./pages/init-explanation";
 import { initGame } from "./pages/init-game";
 import { initFight } from "./pages/init-fight";
+import { initResultsPage } from "./pages/init-results";
 const routes = [
   {
     path: /\/homepage/,
@@ -18,6 +19,10 @@ const routes = [
   {
     path: /\/fight/,
     component: initFight,
+  },
+  {
+    path: /\/results/,
+    component: initResultsPage,
   },
 ];
 
