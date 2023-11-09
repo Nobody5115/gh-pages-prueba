@@ -816,32 +816,32 @@ var _initExplanation = require("./pages/init-explanation");
 var _initGame = require("./pages/init-game");
 var _initFight = require("./pages/init-fight");
 var _initResults = require("./pages/init-results");
-const routes = [
-    {
-        path: /\/homepage/,
-        component: (0, _initHome.initGamePage)
-    },
-    {
-        path: /\/explanation/,
-        component: (0, _initExplanation.initExplanation)
-    },
-    {
-        path: /\/game/,
-        component: (0, _initGame.initGame)
-    },
-    {
-        path: /\/fight/,
-        component: (0, _initFight.initFight)
-    },
-    {
-        path: /\/results/,
-        component: (0, _initResults.initResultsPage)
-    }
-];
 const BASE_PATH = "/piedra-papel-tijeras";
 function isGithubPages() {
     return location.host.includes("nobody5115.github.io");
 }
+const routes = [
+    {
+        path: /^\/homepage/,
+        component: (0, _initHome.initGamePage)
+    },
+    {
+        path: /^\/explanation/,
+        component: (0, _initExplanation.initExplanation)
+    },
+    {
+        path: /^\/game/,
+        component: (0, _initGame.initGame)
+    },
+    {
+        path: /^\/fight/,
+        component: (0, _initFight.initFight)
+    },
+    {
+        path: /^\/results/,
+        component: (0, _initResults.initResultsPage)
+    }
+];
 function initRouter(container) {
     function goTo(path) {
         const completePath = isGithubPages() ? BASE_PATH + path : path;
@@ -858,7 +858,7 @@ function initRouter(container) {
             container?.appendChild(el);
         }
     }
-    if (location.pathname === "/" || location.pathname === "/piedra-papel-tijeras/") goTo("/homepage");
+    if (location.pathname == "/" || location.pathname == "/piedra-papel-tijeras/") goTo("/homepage");
     else handleRoute(location.pathname);
     window.onpopstate = function() {
         handleRoute(location.pathname);
