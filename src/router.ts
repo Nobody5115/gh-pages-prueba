@@ -3,33 +3,34 @@ import { initExplanation } from "./pages/init-explanation";
 import { initGame } from "./pages/init-game";
 import { initFight } from "./pages/init-fight";
 import { initResultsPage } from "./pages/init-results";
-const routes = [
-  {
-    path: /\/homepage/,
-    component: initGamePage,
-  },
-  {
-    path: /\/explanation/,
-    component: initExplanation,
-  },
-  {
-    path: /\/game/,
-    component: initGame,
-  },
-  {
-    path: /\/fight/,
-    component: initFight,
-  },
-  {
-    path: /\/results/,
-    component: initResultsPage,
-  },
-];
 const BASE_PATH = "/piedra-papel-tijeras";
 
 function isGithubPages() {
   return location.host.includes("nobody5115.github.io");
 }
+const routes = [
+  {
+    path: /^\/homepage/,
+    component: initGamePage,
+  },
+  {
+    path: /^\/explanation/,
+    component: initExplanation,
+  },
+  {
+    path: /^\/game/,
+    component: initGame,
+  },
+  {
+    path: /^\/fight/,
+    component: initFight,
+  },
+  {
+    path: /^\/results/,
+    component: initResultsPage,
+  },
+];
+
 export function initRouter(container: Element | null) {
   function goTo(path: string) {
     const completePath = isGithubPages() ? BASE_PATH + path : path;
@@ -51,8 +52,8 @@ export function initRouter(container: Element | null) {
   }
 
   if (
-    location.pathname === "/" ||
-    location.pathname === "/piedra-papel-tijeras/"
+    location.pathname == "/" ||
+    location.pathname == "/piedra-papel-tijeras/"
   ) {
     goTo("/homepage");
   } else {
