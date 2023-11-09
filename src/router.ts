@@ -25,7 +25,7 @@ const routes = [
     component: initResultsPage,
   },
 ];
-const BASE_PATH = "/desafio-m5";
+const BASE_PATH = "/piedra-papel-tijeras";
 
 function isGithubPages() {
   return location.host.includes("nobody5115.github.io");
@@ -40,7 +40,7 @@ export function initRouter(container: Element | null) {
   function handleRoute(route: string) {
     const newRoute = isGithubPages() ? route.replace(BASE_PATH, "") : route;
     for (const r of routes) {
-      if (r.path.test(route)) {
+      if (r.path.test(newRoute)) {
         const el = r.component({ goTo: goTo });
         if (container?.firstChild) {
           container.firstChild.remove();
