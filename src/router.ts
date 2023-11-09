@@ -25,14 +25,20 @@ const routes = [
     component: initResultsPage,
   },
 ];
+const BASE_PATH = "/desafio-m5";
 
+function isGithubPages() {
+  return location.host.includes("nobody5115.github.io");
+}
 export function initRouter(container: Element | null) {
   function goTo(path: string) {
-    history.pushState({}, "", path);
-    handleRoute(path);
+    const completePath = isGithubPages() ? BASE_PATH + path : path;
+    history.pushState({}, "", completePath);
+    handleRoute(completePath);
   }
 
   function handleRoute(route: string) {
+    const newRoute = isGithubPages() ? route.replace(BASE_PATH, "") : route;
     for (const r of routes) {
       if (r.path.test(route)) {
         const el = r.component({ goTo: goTo });
