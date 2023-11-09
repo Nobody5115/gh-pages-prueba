@@ -838,13 +838,19 @@ const routes = [
         component: (0, _initResults.initResultsPage)
     }
 ];
+const BASE_PATH = "/piedra-papel-tijeras";
+function isGithubPages() {
+    return location.host.includes("nobody5115.github.io");
+}
 function initRouter(container) {
     function goTo(path) {
-        history.pushState({}, "", path);
-        handleRoute(path);
+        const completePath = isGithubPages() ? BASE_PATH + path : path;
+        history.pushState({}, "", completePath);
+        handleRoute(completePath);
     }
     function handleRoute(route) {
-        for (const r of routes)if (r.path.test(route)) {
+        const newRoute = isGithubPages() ? route.replace(BASE_PATH, "") : route;
+        for (const r of routes)if (r.path.test(newRoute)) {
             const el = r.component({
                 goTo: goTo
             });
