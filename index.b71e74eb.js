@@ -694,14 +694,14 @@ function initButtonComp() {
           margin-top:10px;
           justify-content:center;
           width: 322px;
-          height: 87px;
+          height: 80px;
           border-radius: 10px;
           letter-spacing: 3px;
           background-color: #008CFC;
           font-size:30px;
           font-weight: bold;
           font-family: "Odibee Sans";
-           border: none;
+           border: solid 1px black;
     cursor: pointer;
     transition: background-color 0.3s;
        animation: buttonExpand 2s infinite;
@@ -1459,6 +1459,8 @@ function initResultComp() {
         justify-content:center;
         align-items:center;
         font-size:25px;
+          letter-spacing: 5px;
+
           font-weight: 400;
           font-family: "Odibee Sans";
           box-shadow: 0 20px 40px gray; /* Sombra inicial dorada */
