@@ -688,15 +688,16 @@ function initButtonComp() {
       .button{
           align-items:center;
           text-align:center;
-          color:#D8FCFC;
+          color:black;
           display:flex;
           margin: 0px auto;
-          margin-top:110px;
+          margin-top:10px;
           justify-content:center;
           width: 322px;
           height: 87px;
           border-radius: 10px;
-          background-color: #006CFC;
+          letter-spacing: 3px;
+          background-color: #008CFC;
           font-size:25px;
           font-weight: 400;
           font-family: "Odibee Sans";
@@ -1029,6 +1030,13 @@ const state = {
         this.setMove("");
         this.computerMove("");
     },
+    restartPoint () {
+        const history = state.getHistory();
+        console.log(history);
+        history[0].myPoint = 0;
+        history[0].computerPoint = 0;
+        return history;
+    },
     whoIsWin (myMove, computerMove) {
         const currentState = this.getState();
         let ganador;
@@ -1177,21 +1185,50 @@ height:250px;
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "initResultsPage", ()=>initResultsPage);
+var _state = require("../state");
 function initResultsPage(params) {
     const div = document.createElement("div");
+    const style = document.createElement("style");
+    style.innerHTML = `
+  .container-buttons{
+display:flex;
+justify-content:center;
+margin:0 auto;
+max-width:110px;
+  }
+  @media (max-width:470px){
+    .container-buttons{
+        flex-direction:column;
+        margin: 0 auto;
+justify-content:center;
+        align-items:center;
+
+    }
+  }
+  `;
     div.innerHTML = `
   <br>
+  <br>
+
 <result-comp></result-comp>
-<button-comp>Volver a jugar</button-comp>
+<div class="container-buttons"><button-comp>Volver a jugar</button-comp>
+<button-comp class="restart-game">Retablecer puntos</button-comp></div>
+
 `;
+    div.appendChild(style);
     const button = div.querySelector("button-comp");
+    const button2 = div.querySelector(".restart-game");
     button?.addEventListener("click", ()=>{
         params.goTo("/explanation");
+    });
+    button2?.addEventListener("click", ()=>{
+        (0, _state.state).restartPoint();
+        params.goTo("/homepage");
     });
     return div;
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"k1cfF":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","../state":"1Yeju"}],"k1cfF":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "initExplanationComp", ()=>initExplanationComp);
@@ -1409,13 +1446,13 @@ function initResultComp() {
             const style = document.createElement("style");
             style.innerHTML = `
       @import url('https://fonts.googleapis.com/css2?family=Odibee+Sans&display=swap');
-      
+      @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
       .container{
         background-color:red;
         width:300px;
         height:120px;
           border: solid 4px black;
-        border-radius:6px;
+        border-radius:16px;
         display:flex;
         margin:0 auto;
         text-align:center;
@@ -1424,12 +1461,21 @@ function initResultComp() {
         font-size:25px;
           font-weight: 400;
           font-family: "Odibee Sans";
+          box-shadow: 0 20px 40px gray; /* Sombra inicial dorada */
+      }
+      .container:hover{
+        width:330px;
+        height:130px;
+         transition: width 1s ease, height 1s ease,box-shadow 1s ease;
       }
       .container-score{
             font-size:20px;
           font-weight: 600;
-          font-family: "Odibee Sans";
-          background-color:white;
+          font-family: 'Bebas Neue', sans-serif;
+            background-color: rgba(255, 255, 255, 0.3);
+         box-shadow: 0 20px 40px black; /* Sombra inicial dorada */
+          letter-spacing: 2px;
+
         width:300px;
         height:200px;
            text-align:center;
@@ -1441,6 +1487,65 @@ function initResultComp() {
         margin:0 auto;
         flex-direction:column;
       }
+         .container-score:hover{
+        width:340px;
+        height:210px;
+         transition: width 1s ease, height 1s ease,box-shadow 1s ease;
+      }
+     .container-score::before {
+  content: '';
+  position: absolute;
+  top: -4px; /* Ajusta la posici\xf3n para que la l\xednea est\xe9 justo fuera del borde superior */
+  left: -4px; /* Ajusta la posici\xf3n para que la l\xednea est\xe9 justo fuera del borde izquierdo */
+  height: 4px; /* Ancho de la l\xednea */
+  width: 0;
+  background-color: #00f;
+  animation: moveLine 2s linear infinite; /* Ajusta la duraci\xf3n y el tipo de animaci\xf3n seg\xfan tus preferencias */
+}
+
+@keyframes moveLine {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}
+    .fireworks-container {
+          position: relative;
+          width: 100%;
+          height: 100%;
+        }
+        
+
+        .fireworks {
+          position: absolute;
+          width: 2px;
+          height: 10px;
+          background-color: #ffeb3b;
+          animation: explode 1s infinite;
+        }
+
+        @keyframes explode {
+          0% {
+            transform: translateY(0) rotate(0deg);
+            opacity: 0;
+          }
+          25% {
+            opacity: 1;
+          }
+          50% {
+            transform: translateY(-50px) rotate(180deg);
+            opacity: 0;
+          }
+          75% {
+            opacity: 1;
+          }
+          100% {
+            transform: translateY(0) rotate(360deg);
+            opacity: 0;
+          }
+        }
         `;
             this.shadow.appendChild(style);
             const shadow = document.createElement("shadow");
@@ -1451,13 +1556,29 @@ function initResultComp() {
       <h2>${currentState.currentGame.ganador}</h2>
       </div><br>
       <div class="container-score">
-      <p>Mis puntos:${history[0].myPoint}</p>
-      <p>PC puntos:${history[0].computerPoint}</p>
+      <p>Mis puntos: ${history[0].myPoint}</p>
+      <p>PC puntos: ${history[0].computerPoint}</p>
       </div>
         `;
             const cuadradoGanador = div.querySelector(".container");
-            if (currentState.currentGame.ganador == "Ganaste") cuadradoGanador.style.backgroundColor = "#6CB46C";
-            else if (currentState.currentGame.ganador == "Empate") cuadradoGanador.style.backgroundColor = "#006CFC";
+            if (currentState.currentGame.ganador == "Ganaste") {
+                cuadradoGanador.style.backgroundColor = "#6CB46C";
+                createFireworks();
+            } else if (currentState.currentGame.ganador == "Empate") {
+                cuadradoGanador.style.backgroundColor = "#006CFC";
+                createFireworks();
+            }
+            function createFireworks() {
+                const fireworksContainer = document.createElement("div");
+                fireworksContainer.classList.add("fireworks-container");
+                div.appendChild(fireworksContainer);
+                for(let i = 0; i < 5; i++){
+                    const firework = document.createElement("div");
+                    firework.classList.add("firework"); // Cambié "fireworks" a "firework"
+                    firework.style.left = `${Math.random() * 100}%`;
+                    fireworksContainer.appendChild(firework);
+                }
+            }
             this.shadow.appendChild(div);
         }
     }
