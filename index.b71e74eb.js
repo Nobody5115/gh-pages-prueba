@@ -1259,7 +1259,7 @@ function initExplanationComp() {
     font-size: 47px;
     font-weight: 600;
     line-height: 100%;
-    margin-top:80px;
+    margin-top:40px;
 
         }
 
