@@ -698,8 +698,8 @@ function initButtonComp() {
           border-radius: 10px;
           letter-spacing: 3px;
           background-color: #008CFC;
-          font-size:25px;
-          font-weight: 400;
+          font-size:30px;
+          font-weight: bold;
           font-family: "Odibee Sans";
            border: none;
     cursor: pointer;
